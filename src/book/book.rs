@@ -390,7 +390,7 @@ fn load_summary_item<P: AsRef<Path> + Clone>(
 ) -> Result<BookItem> {
     match item {
         SummaryItem::Separator => Ok(BookItem::Separator),
-        SummaryItem::Link(ref link) => {
+        SummaryItem::Link(link) => {
             load_chapter(link, localized_src_dir, fallback_src_dir, parent_names, cfg)
                 .map(BookItem::Chapter)
         }

@@ -251,7 +251,7 @@ impl MDBook {
     /// Run the entire build process for a particular [`Renderer`].
     pub fn execute_build_process(&self, renderer: &dyn Renderer) -> Result<()> {
         let preprocessed_books = match &self.book {
-            LoadedBook::Localized(ref books) => {
+            LoadedBook::Localized(books) => {
                 let mut new_books = HashMap::new();
 
                 for (language_ident, book) in books.0.iter() {
@@ -270,7 +270,7 @@ impl MDBook {
 
                 LoadedBook::Localized(LocalizedBooks(new_books))
             }
-            LoadedBook::Single(ref book) => {
+            LoadedBook::Single(book) => {
                 let preprocess_ctx = PreprocessorContext::new(
                     self.root.clone(),
                     None,
@@ -367,6 +367,9 @@ impl MDBook {
                         }
                         RustEdition::E2021 => {
                             cmd.args(&["--edition", "2021"]);
+                        },
+                        RustEdition::E2024 => {
+                            cmd.args(&["--edition", "2024"]);
                         }
                     }
                 }
@@ -650,7 +653,7 @@ fn preprocessor_should_run(
     let key = format!("preprocessor.{}.renderers", preprocessor.name());
     let renderer_name = renderer.name();
 
-    if let Some(Value::Array(ref explicit_renderers)) = cfg.get(&key) {
+    if let Some(Value::Array(explicit_renderers)) = cfg.get(&key) {
         return explicit_renderers
             .iter()
             .filter_map(Value::as_str)
