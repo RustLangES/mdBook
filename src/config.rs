@@ -670,6 +670,8 @@ pub struct RustConfig {
 #[derive(Debug, Copy, Clone, PartialEq, Serialize, Deserialize)]
 /// Rust edition to use for the code.
 pub enum RustEdition {
+    /// The 2024 edition of Rust
+    E2024,
     /// The 2021 edition of Rust
     #[serde(rename = "2021")]
     E2021,
@@ -1322,7 +1324,7 @@ mod tests {
         assert!(cfg.get(key).is_none());
 
         let encoded_key = encode_env_var(key);
-        env::set_var(encoded_key, value);
+        unsafe { env::set_var(encoded_key, value) };
 
         cfg.update_from_env();
 
@@ -1342,7 +1344,7 @@ mod tests {
         assert!(cfg.get(key).is_none());
 
         let encoded_key = encode_env_var(key);
-        env::set_var(encoded_key, value_str);
+        unsafe { env::set_var(encoded_key, value_str) };
 
         cfg.update_from_env();
 
@@ -1361,7 +1363,7 @@ mod tests {
 
         assert_ne!(cfg.book.title, Some(should_be.clone()));
 
-        env::set_var("MDBOOK_BOOK__TITLE", &should_be);
+        unsafe { env::set_var("MDBOOK_BOOK__TITLE", &should_be) };
         cfg.update_from_env();
 
         assert_eq!(cfg.book.title, Some(should_be));

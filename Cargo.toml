@@ -7,14 +7,14 @@ authors = [
     "Matt Ickstadt <mattico8@gmail.com>"
 ]
 documentation = "https://rust-lang.github.io/mdBook/index.html"
-edition = "2021"
+edition = "2024"
 exclude = ["/guide/*"]
 keywords = ["book", "gitbook", "rustbook", "markdown"]
 license = "MPL-2.0"
 readme = "README.md"
 repository = "https://github.com/rust-lang/mdBook"
 description = "Creates a book from markdown files"
-rust-version = "1.70"
+rust-version = "1.86"
 
 [dependencies]
 anyhow = "1.0.71"

@@ -1076,7 +1076,8 @@ fn add_playground_pre(
                 let contains_e2015 = classes.contains("edition2015");
                 let contains_e2018 = classes.contains("edition2018");
                 let contains_e2021 = classes.contains("edition2021");
-                let edition_class = if contains_e2015 || contains_e2018 || contains_e2021 {
+                let contains_e2024 = classes.contains("edition2024");
+                let edition_class = if contains_e2015 || contains_e2018 || contains_e2021 || contains_e2024 {
                     // the user forced edition, we should not overwrite it
                     ""
                 } else {
@@ -1084,6 +1085,7 @@ fn add_playground_pre(
                         Some(RustEdition::E2015) => " edition2015",
                         Some(RustEdition::E2018) => " edition2018",
                         Some(RustEdition::E2021) => " edition2021",
+                        Some(RustEdition::E2024) => " edition2024",
                         None => "",
                     }
                 };
