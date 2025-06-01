@@ -671,6 +671,7 @@ pub struct RustConfig {
 /// Rust edition to use for the code.
 pub enum RustEdition {
     /// The 2024 edition of Rust
+    #[serde(rename = "2024")]
     E2024,
     /// The 2021 edition of Rust
     #[serde(rename = "2021")]
