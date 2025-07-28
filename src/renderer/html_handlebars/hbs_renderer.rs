@@ -410,8 +410,7 @@ impl HtmlHandlebars {
         // multilingual output format.
         if let LoadedBook::Localized(_) = ctx.book {
             if let Some(lang_ident) = language_ident {
-                base_url.push_str(lang_ident);
-                base_url.push_str("/");
+                base_url.push_str(&format!("/{lang_ident}/"));
             }
         }
 
